@@ -1,0 +1,165 @@
+apply plugin: 'com.android.application'
+
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+
+androidExtensions {
+    experimental = true
+}
+
+android {
+    compileSdkVersion 28
+    defaultConfig {
+        applicationId "uk.co.victoriajanedavis.chatapp"
+        minSdkVersion 21
+        targetSdkVersion 28
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        // For the app private permission used for sending the broadcast and registering the NetworkConnectionReceiver (BNR p.570)
+        buildConfigField("String", "APP_PRIVATE_PREMISSION", "\"${chatAppPrivatePermission}\"")
+        manifestPlaceholders = [chatAppPrivatePermission:"${chatAppPrivatePermission}"]
+    }
+
+    buildTypes {
+        // The following debug build settings allowed me to get around a "multidex over 64K methods" error
+        // - from: https://developer.android.com/studio/build/shrink-code#gradle-shrinker
+        debug {
+            minifyEnabled false
+            useProguard false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    testOptions {
+        unitTests.includeAndroidResources = true
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+}
+
+dependencies {
+    final RETROFIT_VERSION = '2.5.0'
+    final DAGGER_VERSION = '2.16'
+    //final MOCKITO_VERSION = '1.10.19'
+    final MOCKITO_VERSION = '2.26.0'
+    final ESPRESSO_VERSION = '3.2.0-alpha03'
+    final ROBOELECTRIC_VERSION = '4.2'
+    final ROOM_VERSION = '2.1.0-alpha06'
+    final LIFECYCLE_VERSION = '2.0.0'
+    //final NAVIGATION_VERSION = '1.0.0'
+    final NAVIGATION_VERSION = '2.1.0-alpha02'
+    final LEAK_CANARY = '1.6.1'
+    //final TINDER_SCARLET_VERSION = '0.2.1-alpha4'
+    final TINDER_SCARLET_VERSION = '0.2.4-alpha1'
+    //final ANDROID_KTX_VERSION = '1.0.1'
+
+    def jUnit = "junit:junit:4.12"
+    def mockito = "org.mockito:mockito-core:$MOCKITO_VERSION"
+
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
+
+    // App Dependencies
+    implementation 'androidx.appcompat:appcompat:1.1.0-alpha04'
+    implementation 'androidx.recyclerview:recyclerview:1.1.0-alpha04'
+    implementation 'androidx.annotation:annotation:1.0.2'
+    implementation 'com.google.android.material:material:1.1.0-alpha05'
+    implementation 'androidx.constraintlayout:constraintlayout:2.0.0-alpha4'
+
+    implementation "com.squareup.retrofit2:retrofit:$RETROFIT_VERSION"
+    implementation "com.squareup.retrofit2:converter-gson:$RETROFIT_VERSION"
+    implementation "com.squareup.retrofit2:adapter-rxjava2:$RETROFIT_VERSION"
+    implementation 'com.squareup.okhttp3:logging-interceptor:3.11.0'
+
+    // Android KTX - Kotlin extensions that are part of Android Jetpack
+    //implementation "androidx.core:core-ktx:$ANDROID_KTX_VERSION"
+
+    // Room
+    implementation "androidx.room:room-runtime:$ROOM_VERSION"
+    implementation "androidx.room:room-rxjava2:$ROOM_VERSION"
+    kapt "androidx.room:room-compiler:$ROOM_VERSION"
+
+    // Navigation Component
+    implementation "androidx.navigation:navigation-fragment-ktx:$NAVIGATION_VERSION"
+    implementation "androidx.navigation:navigation-ui-ktx:$NAVIGATION_VERSION"
+    //implementation "android.arch.navigation:navigation-fragment-ktx:$NAVIGATION_VERSION"
+    //implementation "android.arch.navigation:navigation-ui-ktx:$NAVIGATION_VERSION"
+
+    // ViewModel + LiveData
+    implementation "androidx.lifecycle:lifecycle-extensions:$LIFECYCLE_VERSION"
+    kapt "androidx.lifecycle:lifecycle-compiler:$LIFECYCLE_VERSION"
+
+    // Firebase
+    implementation 'com.google.firebase:firebase-core:16.0.8'
+    implementation 'com.google.firebase:firebase-messaging:17.5.0'
+
+    // LeakCanary
+    debugImplementation "com.squareup.leakcanary:leakcanary-android:$LEAK_CANARY"
+    releaseImplementation "com.squareup.leakcanary:leakcanary-android-no-op:$LEAK_CANARY"
+    // Optional, if you use support library fragments:
+    debugImplementation "com.squareup.leakcanary:leakcanary-support-fragment:$LEAK_CANARY"
+
+    // Rx
+    implementation 'io.reactivex.rxjava2:rxandroid:2.1.0'
+    implementation 'io.reactivex.rxjava2:rxjava:2.2.2'
+
+    // Dagger
+    implementation "com.google.dagger:dagger:$DAGGER_VERSION"
+    implementation "com.google.dagger:dagger-android-support:$DAGGER_VERSION"
+    kapt "com.google.dagger:dagger-compiler:$DAGGER_VERSION"
+    kapt "com.google.dagger:dagger-android-processor:$DAGGER_VERSION"
+    // For testing in androidTest
+    kaptTest "com.google.dagger:dagger-compiler:$DAGGER_VERSION"
+
+    // Tinder/Scarlet (WebSocket library)
+    implementation "com.github.tinder.scarlet:scarlet:$TINDER_SCARLET_VERSION"
+    implementation "com.github.tinder.scarlet:scarlet-protocol-websocket-okhttp:$TINDER_SCARLET_VERSION"
+    implementation ("com.github.tinder.scarlet:scarlet-lifecycle-android:$TINDER_SCARLET_VERSION") {
+        exclude group: 'com.github.tinder', module: 'scarlet'
+    }
+    //implementation "com.github.tinder.scarlet:scarlet-message-adapter-gson:0.2.1-alpha3"
+    implementation "com.github.tinder.scarlet:scarlet-message-adapter-gson:$TINDER_SCARLET_VERSION"
+    implementation "com.github.tinder.scarlet:scarlet-stream-adapter-rxjava2:$TINDER_SCARLET_VERSION"
+
+    implementation 'com.google.code.findbugs:jsr305:3.0.2'
+
+    // Instrumentation test dependencies
+    //androidTestImplementation "androidx.test.ext:junit:1.1.0"
+    //androidTestImplementation "androidx.test.espresso:espresso-core:$ESPRESSO_VERSION"
+    //androidTestImplementation mockito
+    //androidTestImplementation "org.mockito:mockito-android:$MOCKITO_VERSION"
+    //androidTestImplementation "androidx.arch.core:core-testing:2.0.1"
+
+    // Unit tests dependencies
+    testImplementation jUnit
+    testImplementation mockito
+    // For enabling mocking final classes
+    testImplementation "org.mockito:mockito-inline:$MOCKITO_VERSION"
+    testImplementation "org.assertj:assertj-core:3.8.0"
+
+    // Robolectric environment
+    testImplementation 'androidx.test:core:1.1.0'
+    // I added the following because of problems outlined here: https://stackoverflow.com/q/53595837/7648952
+    testImplementation "org.robolectric:robolectric:$ROBOELECTRIC_VERSION"
+
+    //testImplementation 'androidx.test:rules:1.2.0-alpha03'
+    //testImplementation 'androidx.test:runner:1.2.0-alpha03'
+    testImplementation "androidx.test.ext:junit:1.1.0"
+    testImplementation "androidx.arch.core:core-testing:2.0.1"
+    testImplementation "androidx.test.espresso:espresso-core:$ESPRESSO_VERSION"
+
+    // Fragment testing (debugImplementation see: https://issuetracker.google.com/issues/122321150)
+    debugImplementation 'androidx.fragment:fragment-testing:1.1.0-alpha06'
+}
+
+apply plugin: 'com.google.gms.google-services'
