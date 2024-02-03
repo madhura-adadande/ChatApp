@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/homeFragment">
+
+    <!-- Chat Flow -->
+    <!-- FriendRequestsToolbarFragment -->
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="uk.co.victoriajanedavis.chatapp.presentation.ui.home.FriendRequestsToolbarFragment"
+        android:label="fragment_friends"
+        tools:layout="@layout/fragment_friend_requests_toolbar">
+
+        <action
+            android:id="@+id/action_homeFragment_to_loginFlowGraph"
+            app:destination="@id/loginFragment"
+            app:popUpTo="@id/homeFragment"
+            app:popUpToInclusive="true"
+            app:enterAnim="@anim/slide_in_bottom"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/slide_out_bottom"
+            app:launchSingleTop="true"/>
+
+        <action
+            android:id="@+id/action_homeFragment_to_chatFragment"
+            app:destination="@id/chatFragment"
+            app:launchSingleTop="true"/>
+
+        <action
+            android:id="@+id/action_homeFragment_to_sendMessageFragment"
+            app:destination="@id/sendMessageFragment"
+            app:enterAnim="@anim/slide_in_bottom"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/slide_out_bottom"
+            app:launchSingleTop="true"/>
+
+        <action
+            android:id="@+id/action_homeFragment_to_friendRequestsFragment"
+            app:destination="@id/friendRequestsFragment"
+            app:enterAnim="@anim/grow_in_top_right"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/grow_out_top_right"
+            app:launchSingleTop="true"/>
+    </fragment>
+
+    <!-- ChatFragment -->
+    <fragment
+        android:id="@+id/chatFragment"
+        android:name="uk.co.victoriajanedavis.chatapp.presentation.ui.chat.ChatFragment"
+        android:label="fragment_chat"
+        tools:layout="@layout/fragment_chat" />
+
+    <!-- SendMessageFragment -->
+    <fragment
+        android:id="@+id/sendMessageFragment"
+        android:name="uk.co.victoriajanedavis.chatapp.presentation.ui.sendmessage.SendMessageFragment"
+        android:label="fragment_send_message"
+        tools:layout="@layout/fragment_send_message" />
+
+
+    <!-- Login/Register Flow -->
+    <!-- LoginFragment -->
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="uk.co.victoriajanedavis.chatapp.presentation.ui.login.LoginFragment"
+        android:label="fragment_login"
+        tools:layout="@layout/fragment_login">
+
+        <action
+            android:id="@+id/action_loginFragment_to_chatFlowGraph"
+            app:destination="@id/homeFragment"
+            app:popUpTo="@id/loginFragment"
+            app:popUpToInclusive="true"
+            app:launchSingleTop="true"/>
+
+        <action
+            android:id="@+id/action_loginFragment_to_signupFragment"
+            app:destination="@id/signupFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+            app:launchSingleTop="true"/>
+    </fragment>
+
+    <!-- SignupFragment -->
+    <fragment
+        android:id="@+id/signupFragment"
+        android:name="uk.co.victoriajanedavis.chatapp.presentation.ui.signup.SignupFragment"
+        android:label="fragment_signup"
+        tools:layout="@layout/fragment_signup">
+
+        <action
+            android:id="@+id/action_signupFragment_to_chatFlowGraph"
+            app:destination="@id/homeFragment"
+            app:popUpTo="@id/signupFragment"
+            app:popUpToInclusive="true"
+            app:launchSingleTop="true"/>
+    </fragment>
+
+    <!-- FriendRequestsFragment -->
+    <fragment
+        android:id="@+id/friendRequestsFragment"
+        android:name="uk.co.victoriajanedavis.chatapp.presentation.ui.friendrequests.FriendRequestsFragment"
+        android:label="fragment_friend_requests"
+        tools:layout="@layout/fragment_friend_requests">
+        <action
+            android:id="@+id/action_friendRequestsFragment_to_sendFriendRequestFragment"
+            app:destination="@id/sendFriendRequestFragment"
+            app:enterAnim="@anim/slide_in_bottom"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/slide_out_bottom"
+            app:launchSingleTop="true"/>
+    </fragment>
+
+    <!-- SendFriendRequestFragment -->
+    <fragment
+        android:id="@+id/sendFriendRequestFragment"
+        android:name="uk.co.victoriajanedavis.chatapp.presentation.ui.sendfriendrequest.SendFriendRequestFragment"
+        android:label="fragment_send_friend_request"
+        tools:layout="@layout/fragment_send_friend_request" />
+
+</navigation>

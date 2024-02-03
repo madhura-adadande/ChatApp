@@ -1,0 +1,75 @@
+<resources>
+    <string name="app_name">ChatApp</string>
+
+    <!-- Errors and Actions after errors -->
+    <string name="error_no_items_to_display">No items to display</string>
+    <string name="error_generic_error">There was an error, %1$s</string>
+    <string name="action_try_again">Try Again</string>
+    <string name="action_check_again">Check Again</string>
+
+    <!-- Common strings used for forms -->
+    <string name="required_field">*Required</string>
+
+    <!-- LoginFragment -->
+    <string name="fragment_login_username">Username</string>
+    <string name="fragment_login_password">Password</string>
+    <string name="fragment_login_email">Email</string>
+    <string name="fragment_login_login">Login</string>
+    <string name="fragment_login_signup_link">No account yet? Create one</string>
+
+    <!-- SignupFragment -->
+    <string name="fragment_signup_signup">Sign Up</string>
+    <string name="fragment_signup_username">Username</string>
+    <string name="fragment_signup_password1">Password 1</string>
+    <string name="fragment_signup_password2">Password 2</string>
+    <string name="fragment_signup_create_account">Create Account</string>
+    <string name="fragment_signup_login_link">Already a member? Login</string>
+
+    <!-- ChatFragment -->
+    <string name="fragment_chat_add_friend">Add Friend</string>
+    <string name="fragment_chat_friend_requests">Friend Requests</string>
+
+    <!-- MessagingFragment -->
+    <string name="fragment_messaging_message_box_hint">Write a message</string>
+    <string name="fragment_messaging_send_button_description">Message send button</string>
+
+    <!-- FriendRequestsFragment -->
+    <string name="fragment_friend_requests_title">Friend Requests</string>
+    <string name="friend_requests_pager_adapter_received">Received</string>
+    <string name="friend_requests_pager_adapter_sent">Sent</string>
+
+    <!-- ReceivedFriendRequestsFragment -->
+    <string name="received_friend_request_accept">Accept</string>
+    <string name="received_friend_request_reject">Reject</string>
+
+    <!-- SentFriendRequestsFragment -->
+    <string name="sent_friend_request_cancel">Cancel</string>
+
+    <!-- SendFriendRequestFragment -->
+    <string name="menu_send">Send</string>
+    <string name="send_friend_request_username_hint">Username*</string>
+    <string name="send_friend_request_message_hint">Include a message (optional)</string>
+
+    <!-- FriendRequestsToolbarFragment -->
+    <string name="menu_friend_requests">Friend Requests</string>
+    <string name="menu_friend_requests_icon_description">Icon that navigate to list of friend requests upon clicking</string>
+    <string name="menu_logout">Logout</string>
+    <string name="friend_requests_toolbar_pager_adapter_chats">Chats</string>
+    <string name="friend_requests_toolbar_pager_adapter_friends">Friends</string>
+
+    <!-- SendMessageFragment -->
+    <string name="send_message_hint">Message*</string>
+
+    <!-- FriendsFragment -->
+    <string name="send_friend_message">Message</string>
+
+    <!-- SyncService -->
+    <string name="service_sync_description">Service used by ChatApp to perform data syncs</string>
+
+    <!-- ReplyActionService -->
+    <string name="service_reply_action_description">Service used by ChatApp to enable users to reply to chats from message notifications</string>
+
+    <!-- AcceptActionService -->
+    <string name="service_accept_action_description">Service used by ChatApp to enable users to accept received friend requests</string>
+
+</resources>
